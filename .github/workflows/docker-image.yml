@@ -27,7 +27,8 @@ jobs:
     - name: Build Docker image
       run: |
         docker build --tag frankhz28/docker-graphql:0.0.2 .
-
+        docker build --tag frankhz28/docker-graphql:latest .
+        
     - name: Push Docker image
       run: |
         docker push frankhz28/docker-graphql:0.0.2
