@@ -31,6 +31,7 @@ jobs:
     - name: Push Docker image
       run: |
         docker push frankhz28/docker-graphql:0.0.2
+        docker push frankhz28/docker-graphql:latest
     # - name: Docker login
     #   env:
     #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
