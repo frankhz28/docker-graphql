@@ -18,21 +18,34 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Git Semantic Version
+      uses: paulhatch/semantic-version@v4.0.2
+      with:
+        major_pattern: "major:"
+        minor_pattern: "feat:"
+        format: "${major}.${minor}.${patch}-prerelease${increment}"
+      id: version
+  
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build Docker image
+    - name: Logs
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build --tag frankhz28/docker-graphql:0.0.2 .
-        docker build --tag frankhz28/docker-graphql:latest .
+        echo "New version: $NEW_VERSION!!!!"
+    # - name: Build Docker image
+    #   run: |
+    #     docker build --tag frankhz28/docker-graphql:0.0.2 .
+    #     docker build --tag frankhz28/docker-graphql:latest .
         
-    - name: Push Docker image
-      run: |
-        docker push frankhz28/docker-graphql:0.0.2
-        docker push frankhz28/docker-graphql:latest
+    # - name: Push Docker image
+    #   run: |
+    #     docker push frankhz28/docker-graphql:0.0.2
+    #     docker push frankhz28/docker-graphql:latest
     # - name: Docker login
     #   env:
     #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
