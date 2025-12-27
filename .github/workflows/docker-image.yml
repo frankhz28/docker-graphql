@@ -24,6 +24,13 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Build Docker image
+      run: |
+        docker build --tag frankhz28/docker-graphql:0.0.2 .
+
+    - name: Push Docker image
+      run: |
+        docker push frankhz28/docker-graphql:0.0.2 .
     # - name: Docker login
     #   env:
     #     DOCKER_USER: ${{ secrets.DOCKER_USER }}
